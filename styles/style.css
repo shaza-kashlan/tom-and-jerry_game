@@ -1,0 +1,135 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+#game-container {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  background-color: #90ee90; /* Background color: light green */
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+#game-intro {
+  padding: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* 
+#mouse {
+  width: 50px;
+  height: 50px;
+  background-color: brown; /* Mouse color: brown 
+  border-radius: 50%;
+  position: absolute;
+  cursor: pointer;
+} */
+
+#cheese {
+  width: 50px;
+  height: 50px;
+  background-color: #ffd700; /* Cheese color: gold */
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#timer {
+  position: absolute;
+  top: 40px;
+  left: 20px;
+}
+#score {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+#mouse {
+  width: 50px;
+  height: 50px;
+  background-image: url("/images/running_mouse.gif");
+  background-size: cover;
+  position: absolute;
+}
+
+.running {
+  animation: run-animation 0.5s steps(3) infinite; /* Adjust animation duration and steps */
+}
+
+@keyframes run-animation {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -150px;
+  } /* Adjust according to sprite sheet width */
+}
+
+/* 
+@keyframes run {
+  0% {
+    background-image: url("mouse3.png");
+  }
+  50% {
+    background-image: url("mouse3.png");
+  }
+  100% {
+    background-image: url("mouse3.png"); /* Adjust to your sprite sequence 
+  }
+} 
+
+/* #mouse1 {
+  width: 20px;
+  height: 20px;
+  background-image: url("mouse3.png"); /* Initial image */
+/* background-size: auto;
+  position: absolute; 
+}
+/* 
+.running {
+  animation: run 0.5s steps(1) infinite;
+} */
+
+/* #game-screen {
+  display: none;
+  align-content: center;
+  padding: 20px 0px;
+  overflow: hidden;
+  position: relative;
+  background-image: url(../images/road.png);
+  background-size: cover;
+  animation: slide 5s linear infinite;
+} */
+
+/* Add running animation */
+/* @keyframes run {
+    0% {
+      background-image: url("mouse1.png");
+    }
+    50% {
+      background-image: url("mouse2.png");
+    }
+    100% {
+      background-image: url("mouse1.png");
+    }
+  }
+  
+  #mouse {
+    width: 50px;
+    height: 50px;
+    background-image: url("mouse1.png"); /* Initial image */
+/* background-size: cover;
+    position: absolute;
+  }
+  
+  .running {
+    animation: run 0.5s steps(1) infinite;
+  } */
