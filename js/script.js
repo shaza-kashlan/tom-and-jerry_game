@@ -16,10 +16,11 @@ window.onload = function () {
   let timer;
   let mouseX = 0;
   let mouseY = 0;
-  let mouseSpeed = 100; //
-  const winScore = 4; // Define win score
+  let mouseSpeed = 100;
+  let winScore = 4;
+  let jerryLives = 3;
 
-  // Generate a random position for the cheese within the game container
+  // Generate a random position for the cheese
   function generateRandomPosition() {
     const containerWidth =
       document.getElementById("game-container").offsetWidth;
@@ -53,43 +54,38 @@ window.onload = function () {
       scoreDisplay.textContent = score;
       generateRandomPosition();
     }
+
+    // Check collision with obstacles
+    const obstacles = document.getElementsByClassName("obstacle");
+    Array.from(obstacles).forEach((obstacle) => {
+      const obstacleRect = obstacle.getBoundingClientRect();
+      if (
+        mouseRect.left < obstacleRect.right &&
+        mouseRect.right > obstacleRect.left &&
+        mouseRect.top < obstacleRect.bottom &&
+        mouseRect.bottom > obstacleRect.top
+      ) {
+        loseLife();
+      }
+    });
   }
-
-  // function moveMouseTowardsCheese() {
-  //   const mouseRect = mouse.getBoundingClientRect();
-  //   const cheeseRect = cheese.getBoundingClientRect();
-
-  //   const dx = cheeseRect.left - mouseRect.left;
-  //   const dy = cheeseRect.top - mouseRect.top;
-
-  //   const distance = Math.sqrt(dx * dx + dy * dy);
-
-  //   if (distance > mouseSpeed) {
-  //     const angle = Math.atan2(dy, dx);
-  //     const mx = mouseRect.left + mouseSpeed * Math.cos(angle);
-  //     const my = mouseRect.top + mouseSpeed * Math.sin(angle);
-  //     mouse.style.left = mx + "px";
-  //     mouse.style.top = my + "px";
-  //   } else {
-  //     // Mouse reached cheese
-  //     score++;
-  //     document.getElementById("score").textContent = score;
-  //     generateRandomPosition();
-  //   }
-  // }
 
   // Countdown timer function
   function countdown() {
     timeLeft--;
     timeLeftDisplay.textContent = timeLeft;
-
+    let message = "";
     if (timeLeft === 0) {
       clearInterval(timer);
-      if (score >= winScore) {
-        endGame("Congratulations! You won!");
+
+      if (jerryLives > 0 && score >= winScore) {
+        message = "Congratulations! You won!";
+      } else if (jerryLives > 0) {
+        message = "Time's up! Try Again!";
       } else {
-        endGame("Time's up! Try Again !");
+        message = "Game Over! Jerry ran out of lives.";
       }
+      endGame(message);
     }
   }
 
@@ -98,7 +94,36 @@ window.onload = function () {
     mouse.style.left = mouseX - mouse.offsetWidth / 2 + "px";
     mouse.style.top = mouseY - mouse.offsetHeight / 2 + "px";
     checkCollision();
-    mouse.classList.add("running");
+    if (mouseX !== -1) {
+      mouse.classList.add("running");
+    } else {
+      mouse.classList.remove("running");
+    }
+  }
+
+  // Function to generate obstacles
+  function generateObstacle() {
+    const obstacle = document.createElement("div");
+    obstacle.classList.add("obstacle");
+
+    const containerWidth = gameContainer.offsetWidth;
+    const containerHeight = gameContainer.offsetHeight;
+
+    const obstacleSize = 30;
+    const maxX = containerWidth - obstacleSize;
+    const maxY = containerHeight - obstacleSize;
+
+    const randomX = Math.floor(Math.random() * maxX);
+    const randomY = Math.floor(Math.random() * maxY);
+
+    obstacle.style.left = randomX + "px";
+    obstacle.style.top = randomY + "px";
+
+    gameContainer.appendChild(obstacle);
+
+    setTimeout(() => {
+      obstacle.remove();
+    }, 3000);
   }
 
   // Keyboard arrow key event listener
@@ -141,12 +166,13 @@ window.onload = function () {
     gameContainer.style.display = "flex";
     splashScreen.style.display = "none";
     score = 0;
+    jerryLives = 3;
     scoreDisplay.textContent = score;
     timeLeft = 10;
     timeLeftDisplay.textContent = timeLeft;
     generateRandomPosition();
     timer = setInterval(countdown, 1000);
-    //timer = setInterval(moveMouseTowardsCheese, 50); // A
+    setInterval(generateObstacle, 2000);
   }
 
   function endGame(message) {
@@ -157,12 +183,24 @@ window.onload = function () {
     endGameMessage.textContent = message; // Display the win/lose message
   }
 
+  function loseLife() {
+    jerryLives--;
+
+    // Update the UI to reflect remaining lives
+    if (jerryLives >= 0) {
+      // Update UI to reflect remaining lives
+      console.log("Remaining lives: " + jerryLives);
+    } else {
+      endGame("Game Over! Jerry ran out of lives.");
+    }
+  }
+
   // Restart button event listener
   restartGameBtn.addEventListener("click", function () {
     // Reset game state
     score = 0;
     timeLeft = 10;
-
+    jerryLives = 3;
     // Update UI
     scoreDisplay.textContent = score;
     timeLeftDisplay.textContent = timeLeft;

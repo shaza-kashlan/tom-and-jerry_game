@@ -8,7 +8,7 @@ body {
   display: none;
   width: 100vw;
   height: 100vh;
-  background-color: #90ee90; /* Background color: light green */
+  background-color: #4ebe4e; /* Background color: light green */
   justify-content: center;
   align-items: center;
   position: relative;
@@ -52,14 +52,11 @@ body {
 } */
 
 #cheese {
-  width: 50px;
-  height: 50px;
-  background-color: #ffd700; /* Cheese color: gold */
-  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  background-image: url("/images/cheese.png");
+  background-size: cover;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 #timer {
@@ -74,15 +71,38 @@ body {
 }
 
 #mouse {
-  width: 50px;
-  height: 50px;
-  background-image: url("/images/running_mouse.gif");
+  width: 100px;
+  height: 100px;
+  background-image: url("/images/jerry-runnig.png");
   background-size: cover;
   position: absolute;
+
+  top: 0;
+  left: 0;
+}
+
+.obstacle {
+  position: absolute;
+  width: 80px; /* Adjust as needed */
+  height: 50px; /* Adjust as needed */
+  background-image: url("/images/mouse-trap_2_29.png"); /* Replace with your obstacle image */
+  background-size: cover; /* Ensure the image covers the element */
 }
 
 .running {
-  animation: run-animation 0.5s steps(3) infinite; /* Adjust animation duration and steps */
+  animation: run-animation 0.5s steps(8) infinite; /* Adjust timing and number of steps */
+}
+
+@keyframes run-animation {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -100px 0;
+  }
+}
+/* .running {
+  animation: run-animation 0.5s steps(4) infinite; /* Adjust animation duration and steps 
 }
 
 @keyframes run-animation {
@@ -90,67 +110,26 @@ body {
     background-position: 0px;
   }
   100% {
-    background-position: -150px;
-  } /* Adjust according to sprite sheet width */
+    background-position: 150px;
+  } /* Adjust according to sprite sheet width 
+}*/
+
+/* .running {
+  animation: runInAllDirections 2s ease-in-out infinite;
 }
 
-/* 
-@keyframes run {
-  0% {
-    background-image: url("mouse3.png");
+@keyframes runForwardAndBack {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(50px, 0);
   }
   50% {
-    background-image: url("mouse3.png");
+    transform: translate(0, 50px);
   }
-  100% {
-    background-image: url("mouse3.png"); /* Adjust to your sprite sequence 
+  75% {
+    transform: translate(-50px, 0);
   }
-} 
-
-/* #mouse1 {
-  width: 20px;
-  height: 20px;
-  background-image: url("mouse3.png"); /* Initial image */
-/* background-size: auto;
-  position: absolute; 
-}
-/* 
-.running {
-  animation: run 0.5s steps(1) infinite;
 } */
-
-/* #game-screen {
-  display: none;
-  align-content: center;
-  padding: 20px 0px;
-  overflow: hidden;
-  position: relative;
-  background-image: url(../images/road.png);
-  background-size: cover;
-  animation: slide 5s linear infinite;
-} */
-
-/* Add running animation */
-/* @keyframes run {
-    0% {
-      background-image: url("mouse1.png");
-    }
-    50% {
-      background-image: url("mouse2.png");
-    }
-    100% {
-      background-image: url("mouse1.png");
-    }
-  }
-  
-  #mouse {
-    width: 50px;
-    height: 50px;
-    background-image: url("mouse1.png"); /* Initial image */
-/* background-size: cover;
-    position: absolute;
-  }
-  
-  .running {
-    animation: run 0.5s steps(1) infinite;
-  } */
