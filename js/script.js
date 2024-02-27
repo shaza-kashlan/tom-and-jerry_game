@@ -6,13 +6,18 @@ window.onload = function () {
   const startGameBtn = document.getElementById("start-button");
   const gameContainer = document.getElementById("game-container");
   const splashScreen = document.getElementById("splash-screen");
+  const endGameScreen = document.getElementById("endgame-screen");
+  const restartGameBtn = document.getElementById("restart-button");
+  const finalScoreDisplay = document.getElementById("final-score");
+  const endGameMessage = document.getElementById("endgame-message");
 
-  let timeLeft = 30;
+  let timeLeft = 10;
   let score = 0;
   let timer;
   let mouseX = 0;
   let mouseY = 0;
-  let mouseSpeed = 100; // Initial speed of mouse movement
+  let mouseSpeed = 100; //
+  const winScore = 4; // Define win score
 
   // Generate a random position for the cheese within the game container
   function generateRandomPosition() {
@@ -50,28 +55,28 @@ window.onload = function () {
     }
   }
 
-  function moveMouseTowardsCheese() {
-    const mouseRect = mouse.getBoundingClientRect();
-    const cheeseRect = cheese.getBoundingClientRect();
+  // function moveMouseTowardsCheese() {
+  //   const mouseRect = mouse.getBoundingClientRect();
+  //   const cheeseRect = cheese.getBoundingClientRect();
 
-    const dx = cheeseRect.left - mouseRect.left;
-    const dy = cheeseRect.top - mouseRect.top;
+  //   const dx = cheeseRect.left - mouseRect.left;
+  //   const dy = cheeseRect.top - mouseRect.top;
 
-    const distance = Math.sqrt(dx * dx + dy * dy);
+  //   const distance = Math.sqrt(dx * dx + dy * dy);
 
-    if (distance > mouseSpeed) {
-      const angle = Math.atan2(dy, dx);
-      const mx = mouseRect.left + mouseSpeed * Math.cos(angle);
-      const my = mouseRect.top + mouseSpeed * Math.sin(angle);
-      mouse.style.left = mx + "px";
-      mouse.style.top = my + "px";
-    } else {
-      // Mouse reached cheese
-      score++;
-      document.getElementById("score").textContent = score;
-      generateRandomPosition();
-    }
-  }
+  //   if (distance > mouseSpeed) {
+  //     const angle = Math.atan2(dy, dx);
+  //     const mx = mouseRect.left + mouseSpeed * Math.cos(angle);
+  //     const my = mouseRect.top + mouseSpeed * Math.sin(angle);
+  //     mouse.style.left = mx + "px";
+  //     mouse.style.top = my + "px";
+  //   } else {
+  //     // Mouse reached cheese
+  //     score++;
+  //     document.getElementById("score").textContent = score;
+  //     generateRandomPosition();
+  //   }
+  // }
 
   // Countdown timer function
   function countdown() {
@@ -80,25 +85,18 @@ window.onload = function () {
 
     if (timeLeft === 0) {
       clearInterval(timer);
-      endGame();
+      if (score >= winScore) {
+        endGame("Congratulations! You won!");
+      } else {
+        endGame("Time's up! Try Again !");
+      }
     }
-  }
-
-  // End the game
-  function endGame() {
-    clearInterval(timer);
-    alert(`Game Over! Your score: ${score}`);
   }
 
   // Update mouse position and animation
   function updateMousePosition() {
     mouse.style.left = mouseX - mouse.offsetWidth / 2 + "px";
     mouse.style.top = mouseY - mouse.offsetHeight / 2 + "px";
-    // if (mouseX !== 0) {
-    //   mouse.classList.add("running");
-    // } else {
-    //   mouse.classList.remove("running");
-    // }
     checkCollision();
     mouse.classList.add("running");
   }
@@ -150,6 +148,31 @@ window.onload = function () {
     timer = setInterval(countdown, 1000);
     //timer = setInterval(moveMouseTowardsCheese, 50); // A
   }
+
+  function endGame(message) {
+    clearInterval(timer); // Stop the timer
+    gameContainer.style.display = "none"; // Hide the game container
+    endGameScreen.style.display = "block"; // Show the endgame screen
+    finalScoreDisplay.textContent = score; // Display the final score
+    endGameMessage.textContent = message; // Display the win/lose message
+  }
+
+  // Restart button event listener
+  restartGameBtn.addEventListener("click", function () {
+    // Reset game state
+    score = 0;
+    timeLeft = 10;
+
+    // Update UI
+    scoreDisplay.textContent = score;
+    timeLeftDisplay.textContent = timeLeft;
+
+    // Restart game
+    gameContainer.style.display = "flex"; // Show the game container
+    endGameScreen.style.display = "none"; // Hide the endgame screen
+    generateRandomPosition(); // Generate initial cheese position
+    timer = setInterval(countdown, 1000); // Restart the timer
+  });
 
   startGameBtn.addEventListener("click", function () {
     console.log("starting");

@@ -20,6 +20,27 @@ body {
   flex-direction: column;
   align-items: center;
 }
+
+#endgame-screen {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background-color: #ffffff;
+  padding: 20px;
+  border: 2px solid #000000;
+}
+
+#endgame-screen h2 {
+  margin-top: 0;
+}
+
+#endgame-screen button {
+  margin-top: 20px;
+}
+
 /* 
 #mouse {
   width: 50px;
