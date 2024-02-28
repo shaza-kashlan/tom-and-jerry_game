@@ -50,7 +50,7 @@ body {
 }
 .controls h4 {
   margin-right: 10px;
-  color: #703b3b; /* Text color */
+  color: #8c5656; /* Text color */
 }
 
 .controls-img {
@@ -78,7 +78,7 @@ body {
   align-items: center;
 }
 
-#endgame-screen {
+/* #endgame-screen {
   display: none;
   position: absolute;
   top: 50%;
@@ -96,6 +96,85 @@ body {
 
 #endgame-screen button {
   margin-top: 20px;
+} */
+
+#endgame-screen {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+}
+
+#endgame-screen h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: rgb(161, 7, 7);
+}
+
+#endgame-screen p {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  color: rgb(0, 0, 0);
+}
+
+#endgame-screen button {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background-color: #008000; /* Button background color */
+  color: #f9f9f9; /* Button text color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+#endGameConatiner {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+
+#endgame-screen button:hover {
+  background-color: #006400; /* Button background color on hover */
+}
+
+#endgame-screen.win {
+  background-image: url("/images/win.png"); /* Background image for win */
+  background-repeat: no-repeat;
+  background-size: cover;
+  /*color: #ffffff; Text color */
+
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for better readability */
+}
+
+#endgame-screen.lose {
+  background-image: url("/images/lose.png"); /* Background image for lose */
+  background-repeat: no-repeat;
+  background-size: cover;
+  /*color: #ffffff; /* Text color */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for better readability */
+}
+
+#win-endscreen {
+  display: none;
+  flex-direction: row;
+  align-items: flex-start;
+}
+#win2 {
+  background-image: url("/images/win-2.png");
+
+  height: 250px;
+}
+
+#lose-timer-endscreen {
+  display: none;
+}
+#lose-catch-endscreen {
+  display: none;
 }
 
 /* 
@@ -143,7 +222,6 @@ body {
   position: fixed;
   top: 200px; /* Adjust top position as needed */
   left: 200px; /* Adjust left position as needed */
-  background-image: url("/images/tom_kissping.jpg");
 }
 
 #mouse {
@@ -165,8 +243,8 @@ body {
 
 .obstacle {
   position: absolute;
-  width: 195px; /* Adjust as needed */
-  height: 180px; /* Adjust as needed */ /* Replace with your obstacle image */
+  width: 182px; /* Adjust as needed */
+  height: 170px; /* Adjust as needed */ /* Replace with your obstacle image */
   background-size: cover; /* Ensure the image covers the element */
   /* animation: obstacleMoveLeft 8s linear infinite; */
 }

@@ -9,13 +9,16 @@ class Game {
     this.splashScreen = document.getElementById("splash-screen");
     this.restartGameBtn = document.getElementById("restart-button");
     this.jerryLives_value = document.getElementById("lives-value");
+    this.winEndscreen = document.getElementById("win-endscreen");
+    this.loseTimerEndScreen = document.getElementById("lose-timer-endscreen");
+    this.loseCatchEndScreen = document.getElementById("lose-catch-endscreen");
     this.restartGameBtn.addEventListener("click", () => {
       this.restartGame();
     });
     this.timeLeft = 20;
     this.score = 0;
     this.timer;
-    this.winScore = 6;
+    this.winScore = 2;
     this.jerryLives = 3;
     this.mouse = null;
     this.cheese = null;
@@ -95,7 +98,7 @@ class Game {
     clearInterval(this.timer); // Stop the timer
     clearInterval(this.obstacleTimer);
     this.gameContainer.style.display = "none"; // Hide the game container
-    this.endGameScreen.style.display = "block"; // Show the endgame screen
+    this.endGameScreen.style.display = "flex"; // Show the endgame screen
     this.finalScoreDisplay.textContent = this.score; // Display the final score
     this.endGameMessage.textContent = message; // Display the win/lose message
   }
@@ -110,11 +113,15 @@ class Game {
       clearInterval(this.obstacleTimer);
       if (this.jerryLives > 0 && this.score >= this.winScore) {
         message = "Congratulations! You won!";
+        this.winEndscreen.style.display = "flex";
       } else if (this.jerryLives > 0) {
         message = "Time's up! Try Again!";
+        this.loseTimerEndScreen.style.display = "flex";
       } else {
-        message = "Game Over! Jerry ran out of lives.";
+        message = "Jerry ran out of lives.";
+        this.loseCatchEndScreen.style.display = "flex";
       }
+
       this.endGame(message);
     }
   }
@@ -160,7 +167,9 @@ class Game {
       // Update UI to reflect remaining lives
       this.jerryLives_value.textContent = this.jerryLives;
     } else {
-      this.endGame("Game Over! Jerry ran out of lives.");
+      this.endGame(" Jerry ran out of lives.");
+      //  this.endGameScreen.classList.add("lose");
+      this.loseCatchEndScreen.style.display = "flex";
     }
   }
 
@@ -178,6 +187,11 @@ class Game {
     // Restart game
     this.gameContainer.style.display = "flex"; // Show the game container
     this.endGameScreen.style.display = "none"; // Hide the endgame screen
+
+    this.loseTimerEndScreen.style.display = "none";
+    this.loseCatchEndScreen.style.display = "none";
+    this.winEndscreen.style.display = "none";
+
     // this.startGame(); // Generate initial cheese position
     this.cheese.generateRandomPosition();
     // this.timer = setInterval(this.countdown(), 2000);
