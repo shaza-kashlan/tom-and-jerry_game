@@ -8,10 +8,10 @@ body {
   display: none;
   width: 100vw;
   height: 100vh;
-  background-color: #4ebe4e; /* Background color: light green */
-  justify-content: center;
-  align-items: center;
-  position: relative;
+  background-image: url("/images/background5.webp");
+  background-repeat: no-repeat; /* Prevent image from repeating */
+  background-size: cover; /* Adjust size as needed */
+  margin-top: 100;
 }
 
 #game-intro {
@@ -52,56 +52,192 @@ body {
 } */
 
 #cheese {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   background-image: url("/images/cheese.png");
   background-size: cover;
   position: absolute;
 }
 
-#timer {
-  position: absolute;
-  top: 40px;
-  left: 20px;
-}
 #score {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 40px; /* Adjust top position as needed */
+  left: 20px; /* Adjust left position as needed */
+}
+
+#timer {
+  position: absolute;
+  top: 20px; /* Adjust top position as needed */
+  left: 20px; /* Adjust left position as needed */
+}
+
+#lives {
+  position: absolute;
+  top: 60px; /* Adjust top position as needed */
+  left: 20px; /* Adjust left position as needed */
+}
+
+#tom {
+  position: fixed;
+  top: 200px; /* Adjust top position as needed */
+  left: 200px; /* Adjust left position as needed */
+  background-image: url("/images/tom_kissping.jpg");
 }
 
 #mouse {
-  width: 100px;
+  width: 200px;
   height: 100px;
-  background-image: url("/images/jerry-runnig.png");
-  background-size: cover;
-  position: absolute;
+  background-image: url("/images/jerry_run.png");
+  /* background-size: cover;
+  position: fixed; */
 
-  top: 0;
+  /* animation: run-horizontal 6s linear infinite; run-vertical 5s linear infinite; */
+  /* animation: run-animation 6s linear infinite; */
+  background-size: auto 100%;
+  position: fixed;
+  bottom: 0;
   left: 0;
+
+  animation: run-animation 0.5s steps(6.9) infinite;
 }
 
 .obstacle {
   position: absolute;
-  width: 80px; /* Adjust as needed */
-  height: 50px; /* Adjust as needed */
-  background-image: url("/images/mouse-trap_2_29.png"); /* Replace with your obstacle image */
+  width: 180px; /* Adjust as needed */
+  height: 170px; /* Adjust as needed */
+  background-image: url("/images/tom-and-jerry-50.png"); /* Replace with your obstacle image */
   background-size: cover; /* Ensure the image covers the element */
+  animation: obstacleMove 8s linear infinite;
 }
 
-.running {
-  animation: run-animation 0.5s steps(8) infinite; /* Adjust timing and number of steps */
+@keyframes obstacleMove {
+  0%,
+  92% {
+    left: calc(
+      92% - 50px
+    ); /* Starting and ending position (right side of the screen) */
+  }
+  50% {
+    left: 0; /* Middle position (left side of the screen) */
+  }
 }
 
 @keyframes run-animation {
-  from {
+  0% {
     background-position: 0 0;
   }
-  to {
-    background-position: -100px 0;
+  100% {
+    background-position: -1200px 0;
   }
 }
-/* .running {
+
+.running {
+  animation: run-animation 0.5s steps(6) infinite;
+}
+
+.appear {
+  animation: appearAnimation 0.6s ease-in-out forwards;
+}
+
+@keyframes appearAnimation {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animateCheese {
+  animation: appearAnimationCheese 4s ease forwards;
+}
+
+@keyframes appearAnimationCheese {
+  from {
+    opacity: 0;
+    transform: translateY(-50px); /* Initial position */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /* Final position */
+  }
+}
+
+/*
+@keyframes run-animation {
+  0% {
+    background-position: 20px;
+  }
+  100% {
+    background-position: -100px;
+  } /* Adjust according to sprite sheet width 
+} 
+/* @keyframes run-horizontal {
+  0%,
+  100% {
+    transform: translateX(0); /* Start and end position 
+  }
+  50% {
+    transform: translateX(
+      calc(100vw - 100px)
+    ); /* Halfway point (move horizontally) 
+  }
+}
+
+@keyframes run-vertical {
+  0%,
+  100% {
+    transform: translateY(0); /* Start and end position 
+  }
+  50% {
+    transform: translateY(
+      calc(100vh - 100px)
+    ); /* Halfway point (move vertically) 
+  }
+} */
+
+/* 
+@keyframes run-animation {
+  0%,
+  100% {
+    transform: translateX(0); /* Start and end position 
+  }
+  50% {
+    transform: translateX(
+      calc(100vw - 100px)
+    ); /* Halfway point (move forward) 
+  }
+}
+
+.running-backward {
+  animation: run-backward-animation 5s linear infinite; /* Animation for moving backward 
+}
+
+@keyframes run-backward-animation {
+  0%,
+  100% {
+    transform: translateX(calc(100vw - 100px)); /* Start and end position 
+  }
+  50% {
+    transform: translateX(0); /* Halfway point (move backward) 
+  }
+} */
+/* 
+.running {
+  animation: run-forward-animation 6s linear infinite; /* Adjust timing and number of steps 
+}
+
+@keyframes run-forward-animation {
+  0% {
+    left: 0; /* Start position 
+  }
+  100% {
+    left: calc(100vw - 100px); /* End position (100vw - width of the mouse) 
+  }
+} 
+ .running {
   animation: run-animation 0.5s steps(4) infinite; /* Adjust animation duration and steps 
 }
 
@@ -112,7 +248,7 @@ body {
   100% {
     background-position: 150px;
   } /* Adjust according to sprite sheet width 
-}*/
+}
 
 /* .running {
   animation: runInAllDirections 2s ease-in-out infinite;

@@ -8,13 +8,14 @@ class Game {
     this.endGameMessage = document.getElementById("endgame-message");
     this.splashScreen = document.getElementById("splash-screen");
     this.restartGameBtn = document.getElementById("restart-button");
+    this.jerryLives_value = document.getElementById("lives-value");
     this.restartGameBtn.addEventListener("click", () => {
       this.restartGame();
     });
     this.timeLeft = 10;
     this.score = 0;
     this.timer;
-    this.winScore = 4;
+    this.winScore = 10;
     this.jerryLives = 3;
     this.mouse = null;
     this.cheese = null;
@@ -30,11 +31,7 @@ class Game {
     const containerWidth = 1300;
     const containerHeight = 600;
     console.log(`1offset+ ${containerWidth}`);
-    this.containerWidth = this.mouse = new Mouse(
-      containerWidth,
-      containerHeight,
-      100
-    );
+    this.mouse = new Mouse(containerWidth, containerHeight, 100);
     this.cheese = new Cheese(containerWidth, containerHeight);
     this.obstacle = new Obstacle(
       this.gameContainer,
@@ -76,16 +73,20 @@ class Game {
     //this.score = 0;
     // this.jerryLives = 3;
     this.scoreDisplay.textContent = this.score;
+    this.jerryLives_value.textContent = this.jerryLives;
     this.timeLeft = 10;
     this.timeLeftDisplay.textContent = this.timeLeft;
+    // this.mouse.updatePosition();
     this.cheese.generateRandomPosition();
     // this.timer = setInterval(this.countdown(), 2000);
     this.timer = setInterval(() => {
       this.countdown();
+      //  this.cheese.generateRandomPosition();
     }, 1000);
     this.obstacleTimer = setInterval(() => {
       this.obstacle.generateRandomPosition(); // Generate obstacles
-    }, 1000);
+      //  this.cheese.generateRandomPosition();
+    }, 2000);
     // setInterval(this.obstacle.generateRandomPosition(), 2000);
   }
 
@@ -133,6 +134,7 @@ class Game {
     }
     // Check collision with obstacles
     const obstacles = document.getElementsByClassName("obstacle");
+    console.log(`obstacle + ${obstacles.length}`);
     Array.from(obstacles).forEach((obstacle) => {
       const obstacleRect = obstacle.getBoundingClientRect();
       if (
@@ -141,6 +143,7 @@ class Game {
         mouseRect.top < obstacleRect.bottom &&
         mouseRect.bottom > obstacleRect.top
       ) {
+        obstacle.remove();
         this.loseLife();
       }
     });
@@ -152,9 +155,10 @@ class Game {
 
   loseLife() {
     this.jerryLives--;
-    if (this.jerryLives >= 0) {
+
+    if (this.jerryLives > 0) {
       // Update UI to reflect remaining lives
-      console.log("Remaining lives: " + this.jerryLives);
+      this.jerryLives_value.textContent = this.jerryLives;
     } else {
       this.endGame("Game Over! Jerry ran out of lives.");
     }
@@ -165,9 +169,11 @@ class Game {
     this.score = 0;
     this.timeLeft = 10;
     this.jerryLives = 3;
+
     // Update UI
     this.scoreDisplay.textContent = this.score;
     this.timeLeftDisplay.textContent = this.timeLeft;
+    this.jerryLives_value.textContent = this.jerryLives;
 
     // Restart game
     this.gameContainer.style.display = "flex"; // Show the game container

@@ -8,10 +8,10 @@ class Obstacle {
   generateRandomPosition() {
     const obstacleSize = 40;
     const maxX = this.containerWidth - obstacleSize;
-    const maxY = this.containerHeight - obstacleSize;
+    const maxY = this.containerHeight / 2 - obstacleSize;
 
     const randomX = Math.floor(Math.random() * maxX);
-    const randomY = Math.floor(Math.random() * maxY);
+    const randomY = Math.floor(Math.random() * maxY) + this.containerHeight / 2;
 
     const obstacle = document.createElement("div");
     obstacle.classList.add("obstacle");
@@ -19,9 +19,10 @@ class Obstacle {
     obstacle.style.top = randomY + "px";
 
     this.container.appendChild(obstacle);
+    //obstacle.classList.add("appear");
 
     setTimeout(() => {
       obstacle.remove();
-    }, 3000);
+    }, 4000);
   }
 }

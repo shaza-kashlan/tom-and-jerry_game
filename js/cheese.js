@@ -6,14 +6,15 @@ class Cheese {
   }
 
   generateRandomPosition() {
+    this.cheeseElement.classList.add("appear");
     const cheeseWidth = this.cheeseElement.offsetWidth;
     const cheeseHeight = this.cheeseElement.offsetHeight;
 
     const maxX = this.containerWidth - cheeseWidth;
-    const maxY = this.containerHeight - cheeseHeight;
+    const maxY = this.containerHeight / 2 - cheeseHeight;
 
     const randomX = Math.floor(Math.random() * maxX);
-    const randomY = Math.floor(Math.random() * maxY);
+    const randomY = Math.floor(Math.random() * maxY) + this.containerHeight / 2;
 
     this.cheeseElement.style.left = randomX + "px";
     this.cheeseElement.style.top = randomY + "px";

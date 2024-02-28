@@ -5,7 +5,7 @@ class Mouse {
     this.speed = speed;
     this.element = document.getElementById("mouse");
     this.x = 0;
-    this.y = 0;
+    this.y = containerHeight - this.element.offsetHeight;
     this.isRunning = false;
   }
 
@@ -49,8 +49,6 @@ class Mouse {
     // Toggle the running class based on the speed
     if (this.speed > 0) {
       this.element.classList.add("running");
-    } else {
-      this.element.classList.remove("running");
     }
   }
 }
