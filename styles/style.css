@@ -1,7 +1,61 @@
+@font-face {
+  font-family: "fontCatboo"; /* Name your font */
+  src: url("/fonts/Nightcat-lxZnD.otf") format("otf"),
+    url("/fonts/Nightcat-nAx8V.ttf") format("ttf");
+
+  /* Specify font file path */
+  /* Add more src declarations for different font file formats if necessary */
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+  font-family: "fontCatboo";
+  font-size: medium;
+}
+
+#splash-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#start-button {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background-color: #008000; /* Button background color */
+  color: #ffffff; /* Button text color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+#start-button:hover {
+  background-color: #006400; /* Button background color on hover */
+}
+
+.instructions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.controls {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: flex-end;
+  color: #131212; /* Text color */
+}
+.controls h4 {
+  margin-right: 10px;
+  color: #703b3b; /* Text color */
+}
+
+.controls-img {
+  width: 60px; /* Adjust size as needed */
+  margin-top: 10px;
 }
 
 #game-container {
@@ -12,6 +66,9 @@ body {
   background-repeat: no-repeat; /* Prevent image from repeating */
   background-size: cover; /* Adjust size as needed */
   margin-top: 100;
+  font-style: oblique;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 #game-intro {
@@ -52,29 +109,34 @@ body {
 } */
 
 #cheese {
-  width: 90px;
-  height: 90px;
+  width: 70px;
+  height: 70px;
   background-image: url("/images/cheese.png");
   background-size: cover;
   position: absolute;
+  animation: appearAnimation 4s ease-in-out infinite;
 }
 
 #score {
   position: absolute;
-  top: 40px; /* Adjust top position as needed */
+  top: 60px; /* Adjust top position as needed */
   left: 20px; /* Adjust left position as needed */
+  color: rgb(248, 132, 0);
 }
 
 #timer {
   position: absolute;
   top: 20px; /* Adjust top position as needed */
   left: 20px; /* Adjust left position as needed */
+  color: rgb(123, 0, 25);
+  /* rgb(123, 0, 25); */
 }
 
 #lives {
   position: absolute;
-  top: 60px; /* Adjust top position as needed */
+  top: 100px; /* Adjust top position as needed */
   left: 20px; /* Adjust left position as needed */
+  color: darkgreen;
 }
 
 #tom {
@@ -103,8 +165,8 @@ body {
 
 .obstacle {
   position: absolute;
-  width: 180px; /* Adjust as needed */
-  height: 170px; /* Adjust as needed */ /* Replace with your obstacle image */
+  width: 195px; /* Adjust as needed */
+  height: 180px; /* Adjust as needed */ /* Replace with your obstacle image */
   background-size: cover; /* Ensure the image covers the element */
   /* animation: obstacleMoveLeft 8s linear infinite; */
 }
@@ -155,18 +217,20 @@ body {
 .appear {
   animation: appearAnimation 0.6s ease-in-out forwards;
 }
-
 @keyframes appearAnimation {
   0% {
-    opacity: 0;
-    transform: scale(0);
+    opacity: 0; /* Start with opacity 0 (invisible) */
+    transform: scale(0); /* Start with scale 0 (invisible) */
   }
-  100% {
-    opacity: 1;
-    transform: scale(1);
+  50% {
+    opacity: 1; /* Halfway through the animation, opacity 1 (fully visible) */
+    transform: scale(1.2); /* Scale up slightly for a smooth appearance */
+  }
+  93% {
+    opacity: 1; /* End with opacity 1 (fully visible) */
+    transform: scale(1); /* End with scale 1 (original size) */
   }
 }
-
 .animateCheese {
   animation: appearAnimationCheese 4s ease forwards;
 }

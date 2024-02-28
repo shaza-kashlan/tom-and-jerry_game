@@ -12,7 +12,7 @@ class Game {
     this.restartGameBtn.addEventListener("click", () => {
       this.restartGame();
     });
-    this.timeLeft = 10;
+    this.timeLeft = 20;
     this.score = 0;
     this.timer;
     this.winScore = 6;
@@ -74,7 +74,7 @@ class Game {
     // this.jerryLives = 3;
     this.scoreDisplay.textContent = this.score;
     this.jerryLives_value.textContent = this.jerryLives;
-    this.timeLeft = 10;
+    this.timeLeft = 20;
     this.timeLeftDisplay.textContent = this.timeLeft;
     // this.mouse.updatePosition();
     this.cheese.generateRandomPosition();
@@ -167,7 +167,7 @@ class Game {
   restartGame() {
     // Reset game state
     this.score = 0;
-    this.timeLeft = 10;
+    this.timeLeft = 20;
     this.jerryLives = 3;
 
     // Update UI
