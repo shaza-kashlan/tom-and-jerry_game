@@ -15,7 +15,7 @@ class Game {
     this.timeLeft = 10;
     this.score = 0;
     this.timer;
-    this.winScore = 10;
+    this.winScore = 6;
     this.jerryLives = 3;
     this.mouse = null;
     this.cheese = null;

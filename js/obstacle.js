@@ -18,8 +18,19 @@ class Obstacle {
     obstacle.style.left = randomX + "px";
     obstacle.style.top = randomY + "px";
 
+    // Generate a random number between 1 and 5 for the obstacle image
+    const randomNumber = Math.floor(Math.random() * 3) + 1;
+    console.log(randomNumber);
+    // Set the background image based on the random number
+    obstacle.style.backgroundImage = `url('/images/obstacle${randomNumber}.png')`; // Adjust the image names as needed
+
     this.container.appendChild(obstacle);
-    //obstacle.classList.add("appear");
+
+    if (randomNumber === 3) {
+      obstacle.classList.add("runningObstacleRight");
+    } else {
+      obstacle.classList.add("runningObstacleLeft");
+    }
 
     setTimeout(() => {
       obstacle.remove();
