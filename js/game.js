@@ -12,6 +12,9 @@ class Game {
     this.winEndscreen = document.getElementById("win-endscreen");
     this.loseTimerEndScreen = document.getElementById("lose-timer-endscreen");
     this.loseCatchEndScreen = document.getElementById("lose-catch-endscreen");
+    this.startSound = document.getElementById("start-sound");
+    this.collectCheeseSound = document.getElementById("collect-cheese-sound");
+    this.jerryScreamSound = document.getElementById("jerry-scream-sound");
     this.restartGameBtn.addEventListener("click", () => {
       this.restartGame();
     });
@@ -68,9 +71,21 @@ class Game {
     });
   }
 
+  playStartSound() {
+    this.startSound.play();
+  }
+
+  endStartSound() {
+    this.startSound.pause();
+    this.startSound.currentTime = 0;
+  }
+
+  // Call playStartSound() when the game starts
+
   startGame() {
     // Start the game
     // this.initialize();
+    this.playStartSound();
     this.gameContainer.style.display = "flex";
     this.splashScreen.style.display = "none";
     //this.score = 0;
@@ -95,6 +110,7 @@ class Game {
 
   endGame(message) {
     // End the game
+    this.endStartSound();
     clearInterval(this.timer); // Stop the timer
     clearInterval(this.obstacleTimer);
     this.gameContainer.style.display = "none"; // Hide the game container
@@ -135,6 +151,8 @@ class Game {
       mouseRect.top < cheeseRect.bottom &&
       mouseRect.bottom > cheeseRect.top
     ) {
+      this.collectCheeseSound.play();
+
       this.score++;
       this.scoreDisplay.textContent = this.score;
       this.cheese.generateRandomPosition();
@@ -151,6 +169,7 @@ class Game {
         mouseRect.bottom > obstacleRect.top
       ) {
         obstacle.remove();
+        this.jerryScreamSound.play();
         this.loseLife();
       }
     });
@@ -178,7 +197,7 @@ class Game {
     this.score = 0;
     this.timeLeft = 20;
     this.jerryLives = 3;
-
+    this.playStartSound();
     // Update UI
     this.scoreDisplay.textContent = this.score;
     this.timeLeftDisplay.textContent = this.timeLeft;
