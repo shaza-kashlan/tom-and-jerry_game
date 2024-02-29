@@ -17,7 +17,6 @@ class Game {
     this.jerryScreamSound = document.getElementById("jerry-scream-sound");
     this.jerryWinSound = document.getElementById("jerry-win-sound");
     this.tomCatchSound = document.getElementById("tom-catch-sound");
-
     this.muteButton = document.getElementById("mute-button");
     this.restartGameBtn.addEventListener("click", () => {
       this.restartGame();
@@ -25,7 +24,7 @@ class Game {
     this.muteButton.addEventListener("click", () => {
       this.muteGame();
     });
-    this.timeLeft = 20;
+    this.timeLeft = 25;
     this.score = 0;
     this.timer;
     this.winScore = 10;
@@ -102,7 +101,7 @@ class Game {
     this.splashScreen.style.display = "none";
     this.scoreDisplay.textContent = this.score;
     this.jerryLives_value.textContent = this.jerryLives;
-    this.timeLeft = 20;
+    this.timeLeft = 25;
     this.timeLeftDisplay.textContent = this.timeLeft;
     // this.mouse.updatePosition();
     this.cheese.generateRandomPosition();
@@ -147,13 +146,19 @@ class Game {
           this.jerryWinSound.voulume = 0.5;
         }
       } else if (this.jerryLives > 0) {
-        message = "Time's up! Try Again! Sorry You Lose";
+        message = "Time's up! Try Again! Collect at least 10 cheeses to Win";
         this.loseTimerEndScreen.style.display = "flex";
-      } else {
-        message = "Jerry ran out of lives! Sorry You Lose";
-        this.loseCatchEndScreen.style.display = "flex";
         if (!this.isMuted) {
-          this.jerryScreamSound.play();
+          this.jerryWinSound.play();
+          this.jerryWinSound.voulume = 0.5;
+        }
+      } else {
+        message = "Jerry ran out of lives! Sorry You Lose!";
+        this.loseCatchEndScreen.style.display = "flex";
+        console.log("lose in else");
+        if (!this.isMuted) {
+          this.jerryWinSound.play();
+          this.jerryWinSound.voulume = 0.5;
         }
       }
 
@@ -208,19 +213,23 @@ class Game {
       // Update UI to reflect remaining lives
       this.jerryLives_value.textContent = this.jerryLives;
     } else {
-      this.endGame(" Jerry ran out of lives.");
-      //  this.endGameScreen.classList.add("lose");
+      this.endGame("Jerry ran out of lives! Sorry You Lose!");
       this.loseCatchEndScreen.style.display = "flex";
+      if (!this.isMuted) {
+        this.jerryWinSound.play();
+        this.jerryWinSound.voulume = 0.5;
+      }
     }
   }
 
   restartGame() {
     // Reset game state
     this.score = 0;
-    this.timeLeft = 20;
+    this.timeLeft = 25;
     this.jerryLives = 3;
     if (!this.isMuted) {
       this.playStartSound();
+      this.jerryWinSound.pause();
     }
 
     // Update UI
@@ -231,14 +240,10 @@ class Game {
     // Restart game
     this.gameContainer.style.display = "flex"; // Show the game container
     this.endGameScreen.style.display = "none"; // Hide the endgame screen
-
     this.loseTimerEndScreen.style.display = "none";
     this.loseCatchEndScreen.style.display = "none";
     this.winEndscreen.style.display = "none";
-
-    // this.startGame(); // Generate initial cheese position
     this.cheese.generateRandomPosition();
-    // this.timer = setInterval(this.countdown(), 2000);
     this.timer = setInterval(() => {
       this.countdown();
     }, 1000);

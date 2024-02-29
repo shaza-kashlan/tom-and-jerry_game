@@ -1,10 +1,7 @@
 @font-face {
   font-family: "fontCatboo"; /* Name your font */
-  src: url("/fonts/Nightcat-lxZnD.otf") format("otf"),
-    url("/fonts/Nightcat-nAx8V.ttf") format("ttf");
-
-  /* Specify font file path */
-  /* Add more src declarations for different font file formats if necessary */
+  src: url("../fonts/Nightcat-lxZnD.otf") format("otf"),
+    url("../fonts/Nightcat-nAx8V.ttf") format("ttf");
 }
 
 body {
@@ -59,6 +56,11 @@ body {
 .instructions > * {
   margin: 12px; /* Remove margin for all direct children of .instructions */
 }
+
+.instructions h3 {
+  color: #131212;
+  font-weight: bold;
+}
 .controls {
   display: flex;
   flex-direction: row;
@@ -96,26 +98,6 @@ body {
   align-items: center;
 }
 
-/* #endgame-screen {
-  display: none;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  background-color: #ffffff;
-  padding: 20px;
-  border: 2px solid #000000;
-}
-
-#endgame-screen h2 {
-  margin-top: 0;
-}
-
-#endgame-screen button {
-  margin-top: 20px;
-} */
-
 #endgame-screen {
   display: none;
   flex-direction: column;
@@ -132,6 +114,12 @@ body {
   font-size: 2em;
   margin-bottom: 20px;
   color: rgb(161, 7, 7);
+}
+
+#endgame-screen h4 {
+  font-size: 1.3em;
+  margin-bottom: 20px;
+  color: rgb(149, 66, 2);
 }
 
 #endgame-screen p {
@@ -195,15 +183,22 @@ body {
   display: none;
 }
 
-/* 
-#mouse {
-  width: 50px;
-  height: 50px;
-  background-color: brown; /* Mouse color: brown 
-  border-radius: 50%;
-  position: absolute;
-  cursor: pointer;
-} */
+#endgame-message {
+  color: rgb(138, 3, 3); /* Change text color */
+  font-size: 24px; /* Change font size */
+  font-weight: bold; /* Make text bold */
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); /* Add text shadow */
+  animation: blink 1s infinite alternate; /* Add blinking animation */
+}
+
+@keyframes blink {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
 
 #cheese {
   width: 70px;
@@ -246,11 +241,6 @@ body {
   width: 200px;
   height: 100px;
   background-image: url("../images/jerry_run.png");
-  /* background-size: cover;
-  position: fixed; */
-
-  /* animation: run-horizontal 6s linear infinite; run-vertical 5s linear infinite; */
-  /* animation: run-animation 6s linear infinite; */
   background-size: auto 100%;
   position: fixed;
   bottom: 0;
@@ -341,108 +331,3 @@ body {
     transform: translateY(0); /* Final position */
   }
 }
-
-/*
-@keyframes run-animation {
-  0% {
-    background-position: 20px;
-  }
-  100% {
-    background-position: -100px;
-  } /* Adjust according to sprite sheet width 
-} 
-/* @keyframes run-horizontal {
-  0%,
-  100% {
-    transform: translateX(0); /* Start and end position 
-  }
-  50% {
-    transform: translateX(
-      calc(100vw - 100px)
-    ); /* Halfway point (move horizontally) 
-  }
-}
-
-@keyframes run-vertical {
-  0%,
-  100% {
-    transform: translateY(0); /* Start and end position 
-  }
-  50% {
-    transform: translateY(
-      calc(100vh - 100px)
-    ); /* Halfway point (move vertically) 
-  }
-} */
-
-/* 
-@keyframes run-animation {
-  0%,
-  100% {
-    transform: translateX(0); /* Start and end position 
-  }
-  50% {
-    transform: translateX(
-      calc(100vw - 100px)
-    ); /* Halfway point (move forward) 
-  }
-}
-
-.running-backward {
-  animation: run-backward-animation 5s linear infinite; /* Animation for moving backward 
-}
-
-@keyframes run-backward-animation {
-  0%,
-  100% {
-    transform: translateX(calc(100vw - 100px)); /* Start and end position 
-  }
-  50% {
-    transform: translateX(0); /* Halfway point (move backward) 
-  }
-} */
-/* 
-.running {
-  animation: run-forward-animation 6s linear infinite; /* Adjust timing and number of steps 
-}
-
-@keyframes run-forward-animation {
-  0% {
-    left: 0; /* Start position 
-  }
-  100% {
-    left: calc(100vw - 100px); /* End position (100vw - width of the mouse) 
-  }
-} 
- .running {
-  animation: run-animation 0.5s steps(4) infinite; /* Adjust animation duration and steps 
-}
-
-@keyframes run-animation {
-  0% {
-    background-position: 0px;
-  }
-  100% {
-    background-position: 150px;
-  } /* Adjust according to sprite sheet width 
-}
-
-/* .running {
-  animation: runInAllDirections 2s ease-in-out infinite;
-}
-
-@keyframes runForwardAndBack {
-  0%,
-  100% {
-    transform: translate(0, 0);
-  }
-  25% {
-    transform: translate(50px, 0);
-  }
-  50% {
-    transform: translate(0, 50px);
-  }
-  75% {
-    transform: translate(-50px, 0);
-  }
-} */
