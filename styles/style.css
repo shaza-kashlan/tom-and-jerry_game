@@ -208,7 +208,7 @@ body {
 #cheese {
   width: 70px;
   height: 70px;
-  background-image: url("images/cheese.png");
+  background-image: url("./images/cheese.png");
   background-size: cover;
   position: absolute;
   animation: appearAnimation 4s ease-in-out infinite;
