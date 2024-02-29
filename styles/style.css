@@ -79,7 +79,7 @@ body {
   display: none;
   width: 100vw;
   height: 100vh;
-  background-image: url("./images/background5.jpeg");
+  background-image: url("../images/background5.jpeg");
   background-repeat: no-repeat; /* Prevent image from repeating */
   background-size: cover; /* Adjust size as needed */
   margin-top: 100;
