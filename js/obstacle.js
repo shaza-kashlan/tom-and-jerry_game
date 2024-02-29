@@ -22,7 +22,7 @@ class Obstacle {
     const randomNumber = Math.floor(Math.random() * 4) + 1;
     console.log(randomNumber);
     // Set the background image based on the random number
-    obstacle.style.backgroundImage = `url('/images/obstacle${randomNumber}.png')`; // Adjust the image names as needed
+    obstacle.style.backgroundImage = `url('images/obstacle${randomNumber}.png')`; // Adjust the image names as needed
 
     this.container.appendChild(obstacle);
 

@@ -80,7 +80,7 @@ body {
   display: none;
   width: 100vw;
   height: 100vh;
-  background-image: url("/images/background5.webp");
+  background-image: url("images/background5.jpeg");
   background-repeat: no-repeat; /* Prevent image from repeating */
   background-size: cover; /* Adjust size as needed */
   margin-top: 100;
@@ -161,7 +161,7 @@ body {
 }
 
 #endgame-screen.win {
-  background-image: url("/images/win.png"); /* Background image for win */
+  background-image: url("images/win.png"); /* Background image for win */
   background-repeat: no-repeat;
   background-size: cover;
   /*color: #ffffff; Text color */
@@ -170,7 +170,7 @@ body {
 }
 
 #endgame-screen.lose {
-  background-image: url("/images/lose.png"); /* Background image for lose */
+  background-image: url("images/lose.png"); /* Background image for lose */
   background-repeat: no-repeat;
   background-size: cover;
   /*color: #ffffff; /* Text color */
@@ -183,7 +183,7 @@ body {
   align-items: flex-start;
 }
 #win2 {
-  background-image: url("/images/win-2.png");
+  background-image: url("images/win-2.png");
 
   height: 250px;
 }
@@ -208,7 +208,7 @@ body {
 #cheese {
   width: 70px;
   height: 70px;
-  background-image: url("/images/cheese.png");
+  background-image: url("images/cheese.png");
   background-size: cover;
   position: absolute;
   animation: appearAnimation 4s ease-in-out infinite;
@@ -245,7 +245,7 @@ body {
 #mouse {
   width: 200px;
   height: 100px;
-  background-image: url("/images/jerry_run.png");
+  background-image: url("images/jerry_run.png");
   /* background-size: cover;
   position: fixed; */
 
