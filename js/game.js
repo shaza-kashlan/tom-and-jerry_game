@@ -15,18 +15,26 @@ class Game {
     this.startSound = document.getElementById("start-sound");
     this.collectCheeseSound = document.getElementById("collect-cheese-sound");
     this.jerryScreamSound = document.getElementById("jerry-scream-sound");
+    this.jerryWinSound = document.getElementById("jerry-win-sound");
+    this.tomCatchSound = document.getElementById("tom-catch-sound");
+
+    this.muteButton = document.getElementById("mute-button");
     this.restartGameBtn.addEventListener("click", () => {
       this.restartGame();
     });
-    this.timeLeft = 20;
+    this.muteButton.addEventListener("click", () => {
+      this.muteGame();
+    });
+    this.timeLeft = 15;
     this.score = 0;
     this.timer;
-    this.winScore = 2;
+    this.winScore = 10;
     this.jerryLives = 3;
     this.mouse = null;
     this.cheese = null;
     this.obstacle = null;
     this.obstacleTimer;
+    this.isMuted = false;
   }
 
   initialize() {
@@ -85,14 +93,15 @@ class Game {
   startGame() {
     // Start the game
     // this.initialize();
-    this.playStartSound();
+    if (!this.isMuted) {
+      this.playStartSound();
+    }
+
     this.gameContainer.style.display = "flex";
     this.splashScreen.style.display = "none";
-    //this.score = 0;
-    // this.jerryLives = 3;
     this.scoreDisplay.textContent = this.score;
     this.jerryLives_value.textContent = this.jerryLives;
-    this.timeLeft = 20;
+    this.timeLeft = 15;
     this.timeLeftDisplay.textContent = this.timeLeft;
     // this.mouse.updatePosition();
     this.cheese.generateRandomPosition();
@@ -110,7 +119,9 @@ class Game {
 
   endGame(message) {
     // End the game
-    this.endStartSound();
+    if (!this.isMuted) {
+      this.endStartSound();
+    }
     clearInterval(this.timer); // Stop the timer
     clearInterval(this.obstacleTimer);
     this.gameContainer.style.display = "none"; // Hide the game container
@@ -130,12 +141,18 @@ class Game {
       if (this.jerryLives > 0 && this.score >= this.winScore) {
         message = "Congratulations! You won!";
         this.winEndscreen.style.display = "flex";
+        if (!this.isMuted) {
+          this.jerryWinSound.play();
+        }
       } else if (this.jerryLives > 0) {
-        message = "Time's up! Try Again!";
+        message = "Time's up! Try Again! Sorry You Lose";
         this.loseTimerEndScreen.style.display = "flex";
       } else {
-        message = "Jerry ran out of lives.";
+        message = "Jerry ran out of lives! Sorry You Lose";
         this.loseCatchEndScreen.style.display = "flex";
+        if (!this.isMuted) {
+          this.jerryScreamSound.play();
+        }
       }
 
       this.endGame(message);
@@ -151,8 +168,9 @@ class Game {
       mouseRect.top < cheeseRect.bottom &&
       mouseRect.bottom > cheeseRect.top
     ) {
-      this.collectCheeseSound.play();
-
+      if (!this.isMuted) {
+        this.collectCheeseSound.play();
+      }
       this.score++;
       this.scoreDisplay.textContent = this.score;
       this.cheese.generateRandomPosition();
@@ -169,7 +187,9 @@ class Game {
         mouseRect.bottom > obstacleRect.top
       ) {
         obstacle.remove();
-        this.jerryScreamSound.play();
+        if (!this.isMuted) {
+          this.tomCatchSound.play();
+        }
         this.loseLife();
       }
     });
@@ -195,9 +215,12 @@ class Game {
   restartGame() {
     // Reset game state
     this.score = 0;
-    this.timeLeft = 20;
+    this.timeLeft = 15;
     this.jerryLives = 3;
-    this.playStartSound();
+    if (!this.isMuted) {
+      this.playStartSound();
+    }
+
     // Update UI
     this.scoreDisplay.textContent = this.score;
     this.timeLeftDisplay.textContent = this.timeLeft;
@@ -220,5 +243,20 @@ class Game {
     this.obstacleTimer = setInterval(() => {
       this.obstacle.generateRandomPosition(); // Generate obstacles
     }, 2000);
+  }
+
+  muteGame() {
+    this.isMuted = !this.isMuted;
+    if (this.isMuted) {
+      this.startSound.pause();
+      this.collectCheeseSound.pause();
+      this.jerryScreamSound.pause();
+      this.jerryWinSound.pause();
+    } else {
+      this.startSound.play();
+      this.collectCheeseSound.play();
+      this.jerryScreamSound.play();
+      this.jerryWinSound.play();
+    }
   }
 }

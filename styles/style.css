@@ -36,10 +36,28 @@ body {
   background-color: #006400; /* Button background color on hover */
 }
 
+#mute-button {
+  background-color: rgb(180, 7, 7);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 50%; /* Make the button circular */
+}
+
+#mute-button:hover {
+  background-color: darkred;
+}
+
 .instructions {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.instructions > * {
+  margin: 12px; /* Remove margin for all direct children of .instructions */
 }
 .controls {
   display: flex;
@@ -50,7 +68,7 @@ body {
 }
 .controls h4 {
   margin-right: 10px;
-  color: #8c5656; /* Text color */
+  color: #963e20; /* Text color */
 }
 
 .controls-img {
