@@ -143,14 +143,15 @@ class Game {
         this.winEndscreen.style.display = "flex";
         if (!this.isMuted) {
           this.jerryWinSound.play();
-          this.jerryWinSound.voulume = 0.5;
+          this.jerryWinSound.voulume = 0.3;
         }
       } else if (this.jerryLives > 0) {
         message = "Time's up! Try Again! Collect at least 10 cheeses to Win";
         this.loseTimerEndScreen.style.display = "flex";
         if (!this.isMuted) {
           this.jerryWinSound.play();
-          this.jerryWinSound.voulume = 0.5;
+          this.jerryWinSound.voulume = 0.3;
+          this.jerryWinSound.currentTime = 0;
         }
       } else {
         message = "Jerry ran out of lives! Sorry You Lose!";
@@ -158,7 +159,8 @@ class Game {
         console.log("lose in else");
         if (!this.isMuted) {
           this.jerryWinSound.play();
-          this.jerryWinSound.voulume = 0.5;
+          this.jerryWinSound.voulume = 0.3;
+          this.jerryWinSound.currentTime = 0;
         }
       }
 
@@ -217,7 +219,8 @@ class Game {
       this.loseCatchEndScreen.style.display = "flex";
       if (!this.isMuted) {
         this.jerryWinSound.play();
-        this.jerryWinSound.voulume = 0.5;
+        this.jerryWinSound.voulume = 0.3;
+        this.jerryWinSound.currentTime = 0;
       }
     }
   }
@@ -230,6 +233,7 @@ class Game {
     if (!this.isMuted) {
       this.playStartSound();
       this.jerryWinSound.pause();
+      this.jerryWinSound.currentTime = 0;
     }
 
     // Update UI
@@ -265,7 +269,7 @@ class Game {
       this.collectCheeseSound.play();
       this.jerryScreamSound.play();
       this.jerryWinSound.play();
-      this.jerryWinSound.volume = 0.5;
+      this.jerryWinSound.volume = 0.3;
     }
   }
 }

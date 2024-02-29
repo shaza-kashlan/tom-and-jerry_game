@@ -1,22 +1,32 @@
 # Project's name
 
-[Click here to see deployed game](http://github.com)
+[Click here to see deployed game](https://shaza-kashlan.github.io/tom-and-jerry_game/)
 
 ## Description
 
-Brief description of the project
+My project is a fun and interactive game based on Tom and Jerry cartoon.
 
 ## MVP
 
-_MVP definition here, list of minimum features_
+- start screen
+- play screen
+- game over screen
+- win lose logic
+- scoring
 
 ## Backlog
 
-_List of features you might implement after the MVP_
+- multi level
+- storing high score
+- multi screen of game
 
 ## Data structure
 
-_List of classes and methods_
+- cheese class
+- mouse class
+- obstacle class
+- game class
+- script class
 
 ## States y States Transitions
 
@@ -28,6 +38,6 @@ _List of tasks in order of priority_
 
 ## Links
 
-- [Slides Link](http://slides.com)
-- [Github repository Link](http://github.com)
-- [Deployment Link](http://github.com)
+- [Slides Link](https://prezi.com/p/edit/38jx-da50tgu/)
+- [Github repository Link](https://github.com/shaza-kashlan/tom-and-jerry_game.git)
+- [Deployment Link](https://shaza-kashlan.github.io/tom-and-jerry_game/)
