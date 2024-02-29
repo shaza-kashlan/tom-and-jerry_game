@@ -28,10 +28,6 @@ My project is a fun and interactive game based on Tom and Jerry cartoon.
 - game class
 - script class
 
-## States y States Transitions
-
-_List of states (views) of your game_
-
 ## Task
 
 _List of tasks in order of priority_
