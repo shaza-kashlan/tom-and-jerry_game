@@ -80,7 +80,7 @@ body {
   display: none;
   width: 100vw;
   height: 100vh;
-  background-image: url("images/background5.jpeg");
+  background-image: url("images/win-2.png");
   background-repeat: no-repeat; /* Prevent image from repeating */
   background-size: cover; /* Adjust size as needed */
   margin-top: 100;
@@ -208,7 +208,7 @@ body {
 #cheese {
   width: 70px;
   height: 70px;
-  background-image: url("./images/cheese.png");
+  background-image: url("images/cheese.png");
   background-size: cover;
   position: absolute;
   animation: appearAnimation 4s ease-in-out infinite;
