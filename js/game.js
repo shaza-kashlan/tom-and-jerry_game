@@ -34,6 +34,10 @@ class Game {
     this.obstacle = null;
     this.obstacleTimer;
     this.isMuted = false;
+    this.jerryWinSound.volume = 0.07;
+    this.startSound.volume = 0.05;
+    this.collectCheeseSound.volume = 0.4;
+    this.tomCatchSound.volume = 0.06;
   }
 
   initialize() {
@@ -80,7 +84,7 @@ class Game {
 
   playStartSound() {
     this.startSound.play();
-    this.startSound.volume = 0.2;
+    //this.startSound.volume = 0.2;
   }
 
   endStartSound() {
@@ -143,14 +147,14 @@ class Game {
         this.winEndscreen.style.display = "flex";
         if (!this.isMuted) {
           this.jerryWinSound.play();
-          this.jerryWinSound.voulume = 0.3;
+          //  this.jerryWinSound.voulume = 0.04;
         }
       } else if (this.jerryLives > 0) {
         message = "Time's up! Try Again! Collect at least 10 cheeses to Win";
         this.loseTimerEndScreen.style.display = "flex";
         if (!this.isMuted) {
           this.jerryWinSound.play();
-          this.jerryWinSound.voulume = 0.3;
+          //this.jerryWinSound.voulume = 0.04;
           this.jerryWinSound.currentTime = 0;
         }
       } else {
@@ -159,7 +163,7 @@ class Game {
         console.log("lose in else");
         if (!this.isMuted) {
           this.jerryWinSound.play();
-          this.jerryWinSound.voulume = 0.3;
+          // this.jerryWinSound.voulume = 0.04;
           this.jerryWinSound.currentTime = 0;
         }
       }
@@ -219,7 +223,7 @@ class Game {
       this.loseCatchEndScreen.style.display = "flex";
       if (!this.isMuted) {
         this.jerryWinSound.play();
-        this.jerryWinSound.voulume = 0.3;
+        // this.jerryWinSound.voulume = 0.04;
         this.jerryWinSound.currentTime = 0;
       }
     }
@@ -265,11 +269,11 @@ class Game {
       this.jerryWinSound.pause();
     } else {
       this.startSound.play();
-      this.startSound.volume = 0.2;
+      // this.startSound.volume = 0.2;
       this.collectCheeseSound.play();
       this.jerryScreamSound.play();
+
       this.jerryWinSound.play();
-      this.jerryWinSound.volume = 0.3;
     }
   }
 }
